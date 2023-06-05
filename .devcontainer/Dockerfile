@@ -2,7 +2,7 @@ FROM python:3.11
 
 # Set up the working directory.
 WORKDIR /code
-COPY alternative_wordings /code
+COPY ./ /code
 
 # Copy environment.yml (if found) to a temp location so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
