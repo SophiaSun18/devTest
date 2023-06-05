@@ -34,6 +34,6 @@
 		"dockerfile": "Dockerfile"
 	},
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/coverage-py:2": {}
+		"ghcr.io/devcontainers/features/anaconda:1": {"version": "latest"}			// Install Anaconda
 	}
 }

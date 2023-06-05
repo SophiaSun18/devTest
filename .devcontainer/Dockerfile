@@ -18,12 +18,28 @@
 
 FROM mcr.microsoft.com/devcontainers/python:0-3.11-bullseye
 
+# Some default settings which I don't really know what is happening.
 COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
 RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
     && rm -rf /tmp/conda-tmp
 
-COPY .devcontainer/requirements.txt /tmp/conda-tmp/
+# Install PyTorch.
+RUN pip install torch torchvision torchaudio
+
+# Install spacy.
+RUN pip install -U pip setuptools wheel
+RUN pip install -U spacy
+RUN python -m spacy download en_core_web_sm
+
+# Copy the requirement.txt into the cwd and run pip to install all necessary packages.
+COPY alternative_wordings/requirements.txt /tmp/conda-tmp/
 RUN pip install --no-cache-dir --upgrade -r /tmp/conda-tmp/requirements.txt
 
-COPY ./app /tmp/conda-tmp/app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+RUN npm install
+
+
+
+
+# fastapi test
+# COPY ./app /tmp/conda-tmp/app
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
