@@ -29,7 +29,10 @@
 {
 	"name": "devTest",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/python:0-3.11-bullseye",
+	"build": {
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	},
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/coverage-py:2": {}
 	}
