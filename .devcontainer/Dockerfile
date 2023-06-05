@@ -35,6 +35,8 @@ RUN python -m spacy download en_core_web_sm
 COPY alternative_wordings/requirements.txt /tmp/conda-tmp/
 RUN pip install --no-cache-dir --upgrade -r /tmp/conda-tmp/requirements.txt
 
+COPY alternative_wordings/package.json /tmp/conda-tmp/
+COPY alternative_wordings/package-lock.json /tmp/conda-tmp/
 RUN pip install npm
 RUN npm install
 
