@@ -6,6 +6,6 @@
 		"dockerfile": "Dockerfile"
 	},
 	"features": {
-		"ghcr.io/devcontainers/features/anaconda:1": {"version": "latest"}			// Install Anaconda
+		"ghcr.io/devcontainers/features/anaconda:1": {"version": "system"}			// Install Anaconda
 	}
 }
