@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.11
 
 # Set up the working directory.
 WORKDIR /tmp/conda-tmp/
