@@ -10,14 +10,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN npm install
 
 # Add the mBART50 model and extract the inner file
-# ADD https://dl.fbaipublicfiles.com/fairseq/models/mbart50/mbart50.ft.nn.tar.gz /alternative_wordings/
-# RUN tar -xJf /alternative_wordings/mbart50.ft.nn.tar.gz -C /alternative_wordings
-# RUN make -C /alternative_wordings all
-
-RUN mkdir -p /alternative_wordings \
-    && curl -SL https://dl.fbaipublicfiles.com/fairseq/models/mbart50/mbart50.ft.nn.tar.gz \
-    | tar -xJC /alternative_wordings \
-    && make -C /alternative_wordings all
+ADD https://dl.fbaipublicfiles.com/fairseq/models/mbart50/mbart50.ft.nn.tar.gz /alternative_wordings/
+RUN tar -xz /alternative_wordings/mbart50.ft.nn.tar.gz
 
 # Update pip
 RUN pip install --upgrade pip
