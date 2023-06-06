@@ -4,13 +4,20 @@ FROM python:3.10
 WORKDIR /code
 COPY ./ /code
 
-# Add the mBART50 model to the working directory
-ADD https://dl.fbaipublicfiles.com/fairseq/models/mbart50/mbart50.ft.nn.tar.gz /code/alternative_wordings
-
 # RUN npm install
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
      && apt-get -y install --no-install-recommends npm
 RUN npm install
+
+# Add the mBART50 model and extract the inner file
+ADD https://dl.fbaipublicfiles.com/fairseq/models/mbart50/mbart50.ft.nn.tar.gz /alternative_wordings/
+RUN tar -xJf /alternative_wordings/mbart50.ft.nn.tar.gz -C /alternative_wordings
+RUN make -C /alternative_wordings all
+
+# RUN mkdir -p /alternative_wordings \
+#     && curl -SL https://dl.fbaipublicfiles.com/fairseq/models/mbart50/mbart50.ft.nn.tar.gz \
+#     | tar -xJC /alternative_wordings \
+#     && make -C /alternative_wordings all
 
 # Update pip
 RUN pip install --upgrade pip
