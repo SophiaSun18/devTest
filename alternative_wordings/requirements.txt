@@ -1,4 +1,0 @@
-transformers
-flask
-flask-cors
-fairseq
