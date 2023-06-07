@@ -9,10 +9,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
      && apt-get -y install --no-install-recommends npm
 RUN npm install
 
-# Add the mBART50 model and extract the inner file
-ADD https://dl.fbaipublicfiles.com/fairseq/models/mbart50/mbart50.ft.nn.tar.gz /alternative_wordings/
-RUN tar -xz /alternative_wordings/mbart50.ft.nn.tar.gz
-
 # Update pip
 RUN pip install --upgrade pip
 # Install packages
@@ -23,3 +19,7 @@ RUN python -m spacy download en_core_web_sm
 
 # Copy the requirement.txt into the WORKDIR and run pip to install all necessary packages.
 RUN pip install --no-cache-dir --upgrade -r /code/alternative_wordings/requirements.txt
+
+# Add the mBART50 model and extract the inner file
+ADD https://dl.fbaipublicfiles.com/fairseq/models/mbart50/mbart50.ft.nn.tar.gz /alternative_wordings/
+RUN tar -xz /alternative_wordings/mbart50.ft.nn.tar.gz
